@@ -2,54 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Practical PDFs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Files</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            margin: 0;
-            padding: 20px;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 50px;
         }
         h1 {
-            text-align: center;
-            background: #4A90E2;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
+            color: #333;
         }
-        .pdf-card {
+        .file-box {
             background: white;
-            padding: 15px;
-            margin: 15px 0;
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
             border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        a.button {
-            background: #4A90E2;
-            color: white;
-            padding: 10px 15px;
+        a {
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
+            color: white;
+            background: #007BFF;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
         }
-        a.button:hover {
-            background: #357ABD;
+        a:hover {
+            background: #0056b3;
         }
     </style>
 </head>
-
 <body>
-    <h1>My Practical PDFs</h1>
 
-    <!-- Add your PDFs here -->
-    <div class="pdf-card">
-        <h3>PDF 1: Example Notes</h3>
-        <a class="button" href="practicals nb.nb" target="_blank">Open PDF</a>
+    <h1>📂 My Uploaded Files</h1>
+
+    <div class="file-box">
+        <h3>CA.nb File</h3>
+        <a href="CA.nb" target="_blank">Open / Download</a>
     </div>
 
-    <div class="pdf-card">
-        <h3>PDF 2: Another File</h3>
-        <a class="button" href="practicals pdf.pdf" target="_blank">Open PDF</a>
+    <div class="file-box">
+        <h3>CApdf.pdf</h3>
+        <a href="CApdf.pdf" target="_blank">Open PDF</a>
+    </div>
+
+    <div class="file-box">
+        <h3>CA_PRAC.txt</h3>
+        <a href="CA_PRAC.txt" target="_blank">View Text File</a>
     </div>
 
 </body>
