@@ -1,0 +1,253 @@
+CA_PRACs
+---------------------------------------------------------------
+PR1 nth roots of unity are  equaLly spaced for n=4,5,6.7.8
+---------------------------------------------------------------
+(*for n=4*)
+ComplexExpand[z/.Solve[z^4-1==0]]
+A1 = Show[Graphics[{Thick,Red,Circle[{0,0},1]}],
+ListLinePlot[{{-1,0},{0,-1},{1,0},{0,1},{-1,0}},PlotStyle->Blue,PlotMarkers->Automatic],Axes->True,ImageSize->100,PlotLabel->"For n=4"]
+
+(*for n=5*)
+ComplexExpand[z/.NSolve[z^5-1==0]]
+A2 = Show[Graphics[{Thick,Red,Circle[{0,0},1]}],
+ListLinePlot[{{1,0},{0.309017,0.951057},{-0.809017,0.587785},{-0.809017,-0.587785},{0.309017,-0.951057},{1,0}},PlotStyle->{Purple,Dashed,Thick},PlotMarkers->Automatic],Axes->True,ImageSize->100,PlotLabel->"For n=5"]
+
+(*for n=6*)
+ComplexExpand[z/.NSolve[z^6-1==0]]
+A3 = Show[Graphics[{Thick,Red,Circle[{0,0},1]}],
+ListLinePlot[{{1,0},{0.5,0.866025},{-0.5,0.866025},{-1,0},{-0.5,-0.866025},{0.5,-0.866025},{1,0}},PlotStyle->{Magenta,Dashed,Thick},PlotMarkers->Automatic],Axes->True,ImageSize->100,PlotLabel->"For n=6"]
+
+(*for n=7*)
+ComplexExpand[z/.NSolve[z^7-1==0]]
+A4 = Show[Graphics[{Thick,Red,Circle[{0,0},1]}],
+ListLinePlot[{{1,0},{0.62349,0.781831},{-0.222521,0.974928},{-0.900969,0.433884},{-0.900969,-0.433884},{-0.222521,-0.974928},{0.62349,-0.781831}},PlotStyle->{Orange,Dashed,Thick},PlotMarkers->Automatic],Axes->True,ImageSize->100,PlotLabel->"For n=7"]
+
+(*for n=8*)
+ComplexExpand[z/.NSolve[z^7-1==0]]
+A5 = Show[Graphics[{Thick,Red,Circle[{0,0},1]}],
+ListLinePlot[{{1,0},{0.707107,0.707107},{0,1},{-0.707107,0.707107},{-1,0},{-0.707107,-0.707107},{0,-1},{0.707107,-0.707107}},PlotStyle->{Gray,Dashed,Thick},PlotMarkers->Automatic],Axes->True,ImageSize->100,PlotLabel->"For n=8"]
+
+Print[A1,A2,A3,A4,A5]
+
+
+-----------------------------------------------------------------------------
+PR2 Find the solution of z^3 = 8*ι,  and represent these solution graphically.
+-----------------------------------------------------------------------------
+
+sol = ComplexExpand[z/.Solve[z^3-8*I==0]]
+pts={Re[#],Im[#]}&/@sol;a=Graphics[{Red,PointSize[Large],Point[pts]},Axes->True];b=Graphics[{Thick,Magenta,Circle[{0,0},2]}];Show[a,b]
+OR;
+A1=Show[Graphics[{Thick,Red,Circle[{0,0},2]}],ListLinePlot[{{0,-2},{1,-Sqrt[3]},{1,Sqrt[3]}},PlotStyle->{Magenta,Dashed,Thick},PlotMarkers->Automatic],Axes->True,ImageSize->200,PlotLabel->"Solutions of z^3=8*I"]
+
+Examples
+
+sol = ComplexExpand[z/.Solve[z^5-32*I==0]]
+pts={Re[#],Im[#]}&/@sol;a=Graphics[{Red,PointSize[Large],Point[pts]},Axes->True];b=Graphics[{Thick,Magenta,Circle[{0,0},2]}];Show[a,b]
+
+sol = ComplexExpand[z/.Solve[z^4+625*I==0]]
+pts={Re[#],Im[#]}&/@sol;a=Graphics[{Red,PointSize[Large],Point[pts]},Axes->True];b=Graphics[{Thick,Magenta,Circle[{0,0},5]}];Show[a,b]
+
+sol = ComplexExpand[z/.Solve[z^6-2-3*I==0]]
+pts={Re[#],Im[#]}&/@sol;a=Graphics[{Red,PointSize[Large],Point[pts]},Axes->True];b=Graphics[{Thick,Magenta,Circle[{0,0},13^(1/12)]}];Show[a,b]
+
+---------------------------------------------------------------------------------
+PR3 Write Parametric equations and make a parametric plot an ellipse centered at the originwithhorizontalmajoraxisof4unitsandverticalminoraxisof2units.Show the effect of rotation of this ellipse by an angle of pi/6 radians and shifting of the centre from (0,0) to (2,1) by making parametric plot.
+---------------------------------------------------------------------------------------
+
+A1=ParametricPlot[{4Cos[t],2Sin[t]},{t,0,2Pi},Frame->True,ImageSize->250,PlotLabel->"Ellipse"];
+A2=ParametricPlot[{4Cos[t]Cos[π/6]-2Sin[t]Sin[Pi/6],4Cos[t]Sin[Pi/6]+2Sin[t]Cos[Pi/6]},{t,0,2Pi},Frame->True,ImageSize->250,PlotLabel->"Ellipse after rotation by 30 degrees"];
+A3=ParametricPlot[{4Cos[t]Cos[π/6]-2Sin[t]Sin[Pi/6]+2,4Cos[t]Sin[Pi/6]+2Sin[t]Cos[Pi/6]+1},{t,0,2Pi},Frame->True,ImageSize->250,PlotLabel->"Ellipse after shifting origin"];
+Print[A1,A2,A3]
+
+--------------------------------------------------------------
+PR 4 Show that the image of the open disk D1 (-1-i) = {z : |z+1+i|<1} under linear transformation w=f(z) = (3-4i)z  + (6+2i) is the open disk: D5 (-1+3i) = {w: |w+1-3i|<5}
+----------------------------------------------------------------
+
+---
+Method1
+---
+
+Print["The open disk |z+1+i|<1 is given by the figure."];RegionPlot[Abs[x+I*y+1+I]<1,{x,-10,10},
+{y,-10,10},BoundaryStyle->Dashed,PlotRange->5,Axes->True]
+f[z_]:=(3-4I)z+6+2I;w=u+I*v;root:=z/.ComplexExpand[Solve[f[z]==w,z]];
+Print["The image of the open disk |z+1+i|<1 under the function f[z]=",f[z]," is ",Simplify[Refine[Abs[root[[1]]+1+I]<1,Element[{u,v},Reals]]],"and is given by figure"];RegionPlot[Abs[root[[1]]+1+I]<1,{u,-10,10},{v,-10,10},PlotStyle->Magenta,BoundaryStyle->Dashed,PlotRange->10,Axes->True]
+
+---
+Method2
+---
+
+Solve[w1==(3-4I)*z1+(6+2I),z1]
+
+z=x+I*y;A1=RegionPlot[Abs[z+(1+I)]<1,{x,-8,8},{y,-8,8},Axes->True,ImageSize->200,PlotLabel->"Region{z=|z+1+I|<1}"];A2=RegionPlot[ Abs[(1/25)*(-10+3z+2I(-15+2z))+(1+I)]<1,{x,-8,8},{y,-8,8},Axes->True,ImageSize->200,PlotLabel->"Region{z=| 1 25 (-10+3 z+2I(-15+2 z))+1+I|<1}"];Print[A1,A2]
+
+---
+Image of semi-disc S = {z:|z|<1,Im[z]>0} under the mapping f[z]=1/(z+1)
+---
+
+Solve[w1==1/(z1+1),z1]
+z1=x+I*y;A1=RegionPlot[Abs[z1]<1&&Im[z1]>0,{x,-2,2},{y,-2,2},Axes->True,ImageSize->200,PlotLabel->"Region{z:|z|<1,Im z>0}"];A2=RegionPlot[Abs[1/z1 - 1]<1&&Im[1/z1 - 1]>0,{x,-2,2},{y,-2,2},Axes->True,ImageSize->200,PlotLabel->"Region{z:|z= |z1-1|<1,Im z>0}"];Print[A1,A2]
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+PR5 To Show that image of D1 ={z: Re[z]>1} under the mapping f[z]= (-1+I)z -2+3I is the half plane v>u+7, where u == Re[w]. Plot the map.
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+Solve[w1==(-1+I)Subscript[z, 1]-2+3I,Subscript[z, 1]]
+Subscript[z, 1]=x+I*y;A1=RegionPlot[Re[Subscript[z, 1]]>1,{x,-10,10},{y,-10,10},Axes->True,ImageSize->200,PlotLabel->"Region{z:Re[z]>1}"];A2=RegionPlot[ Re[(1/2)*(-5+I(1-Subscript[z, 1])-Subscript[z, 1])]>1,{x,-10,10},{y,-10,10},Axes->True,ImageSize->200,PlotLabel->"Region{z:Re[(1/2)*(-5+I(1-z)-z)]>1}"];Print[A1,A2]
+
+-----------------------------------------------------------------------------------------------------
+PR6 To Show that the image of the right half plane A = {z: Re[z] >= 1/2} under the mapping w = f[z] = 1/z is the closed disk D1 (1)= {w:  |w-1| <=1} in the w-plane.
+------------------------------------------------------------------------------------
+
+Solve[w1==1/z1,z1]
+z1=x+I y;A1=RegionPlot[ Re[z1]>= 1/2, {x,-2,2},{y,-2,2},Axes->True,ImageSize->200,PlotLabel->"Region{z:Re[z]>=1/2}"];
+A2=RegionPlot [Re[1/z1]>= 1/2,{x,-2,2},{y,-2,2},Axes->True,ImageSize->200,PlotLabel->"Region{z:Re[1/z1]>=1/2}"];
+Print[A1,A2]
+
+--------------------------------------------------------
+PR7 Make a plot of the vertical lines x=a, for a = -1,-1/2,1/2,1 , and the horizontal lines y = b, for b=-1,-1/2,1/2,1. .Find the plot of this grid under the mapping w= f[z]= 1/z.
+------------------------------------------------------
+
+
+z=x+I*y;
+A1=ContourPlot[{Re[z]==-1,Re[z]== -1/2, Re[z] == 1/2, Re[z]==1,Im[z]==-1,Im[z]== -1/2, Im[z] == 1/2, Im[z]==1},{x,-2,2},{y,-2,2},Axes->True,ImageSize->250,PlotLegends->{"Re[z]==-1","Re[z]==-1/2", "Re[z] == 1/2", "Re[z]==1","Im[z]==-1","Im[z]== -1/2","Im[z] == 1/2"}];
+A2=ContourPlot[{Re[1/z]==-1,Re[1/z]== -1/2, Re[1/z] == 1/2, Re[1/z]==1,Im[1/z]==-1,Im[1/z]== -1/2, Im[1/z] == 1/2, Im[1/z]==1},{x,-2,2},{y,-2,2},Axes->True,ImageSize->250,PlotLegends->{"Re[1/z]==-1","Re[1/z]==-1/2", "Re[1/z] == 1/2", "Re[1/z]==1","Im[1/z]==-1","Im[1/z]== -1/2","Im[1/z] == 1/2"}];
+Print[A1,A2]
+
+------------------------------------------------------------------------------------------------------------------------------
+PR 8 Find a parametric Representation of the path C = C1 + C2 + C3,FROM -1+I to 3-I, where C1  is the line from -1+I to-1 ; C2 is a line from -1 to 1+I and C3 is a line from 1+I to 3-I.Make a plot of this path. 
+----------------------------------------------------------------------------------------------------------------
+
+
+w1:=-1+I;w2:=-1;w3:=1+I;w4:=3-I;z1[t_]:=(1-t)w1+t w2;z2[t_]:=(1-t)w2+t w3;z3[t_]:=(1-t)w3+t w4;Print["The parametric representation of C1,C2, and C3 are given by"]
+Print["C1 : z1[t] = ",z1[t]," ,0<=t<=1"]
+Print["C2 : z2[t] = ",z2[t],", 0<=t<=1"]
+Print["C3 : z3[t] = ",z3[t],", 0<=t<=1"]
+Print["The plot of the polynomial C=C1+C2+C3 is given by the figure"]
+ParametricPlot[ {{Re[z1[t]],Im[z1[t]]},{Re[z2[t]],Im[z2[t]]},{Re[z3[t]],Im[z3[t]]}},{t,0,1},PlotStyle->{Red,Blue,Green},AxesLabel->{"x","y"}]
+
+
+
+----------------------------------------------------------------------------------------------------------
+PR9 Find the line segment "L" joining the point A=0 to B=2+I (Pi/4), and give the exact calculation of Contour Integral e^z dz
+------------------------------------------------------------------------------------------------------
+
+
+w1:=0;
+w2:=2+I*Pi/4 ;z[t_]:=(1-t)w1+t w2;Print["The parametric representation of L is given by"]
+Print["L: z[t]=",z[t]," , 0<=t<=1"]
+Print["The plot ofthe line segment L is giventhe figure"]
+ParametricPlot[{Re[z[t]],Im[z[t]]},{t,0,1},PlotStyle->{Thick,Red},AxesLabel->{"x","y"}]
+f[z_]:=Exp[z];
+Print["∫L e^z dz = " , ComplexExpand[Integrate[f[z[t]]*z'[t],{t,0,1}]]]
+
+
+--------------------------------------------------------------------------------------------------------
+PR10 Plot the semicircle'C'with the radius 1 at z = 2and evaluate the contour integral  ∫c  1/(z-2)dz
+------------------------------------------------------------------------------------------------------
+
+
+ParametricPlot[{2+Cos[t],Sin[t]},{t,0,Pi},PlotRange->{{-1,4},{-2,2}},PlotStyle->{Red,Thick},ImageSize->{250}]
+f[z_]:=1/(z-2)
+z[t_]:=2+Cos[t]+I*Sin[t];
+Print["∫c 1/(z-2) dz = ", ComplexExpand[Integrate[f[z[t]]*z'[t],{t,0,Pi}]]]
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+PR11 Show that ∫c1 zdz = ∫c2 zdz = 4 + 2*I, where C1 is the line segment from-1+I to 3+I, andC2 is the portion of parabola x = y^2 +2y joining -I to 3+I.Make plots of two contours C1 and C2 joining -1-I to 3+I.
+--------------------------------------------------------------------------------------------------------------------------------------
+
+w1:=-1-I;w2:=3+I;z1[t_]:=(1-t)*w1+t*w2;z2[t_]:=(t^2+2t)+I*t;Print["The parametrization of the line segment C1 is given by"]
+Print["C1: z[t] = ",z1[t]," , 0<=t<=1"]
+Print["The parametrization of the portion of parabola C2 is given by"]
+Print["C2: z[t] = ",z2[t]," ,-1<=t<=1"]
+Print["The plots of the line segment C1 and portion of the parabola C2 is given by the figure"]
+Show[ParametricPlot[{Re[z1[t]],Im[z1[t]]},{t,0,1},PlotStyle->{Thick,Red}],ParametricPlot[{Re[z2[t]],Im[z2[t]]},{t,-1,1},PlotStyle->{Thick,Blue}]]
+f[z_]:=z;
+Print["∫c1 zdz = " ,Integrate[f[z1[t]]*z1'[t],{t,0,1}],"------(1)"]
+Print["∫c2 zdz = " ,Integrate[f[z2[t]]*z2'[t],{t,-1,1}],"------(2)"]
+Print["There by (1) and (2), we proved the required part."]
+
+----------------------------------------------------------
+PR12 Use ML-inequality to show that integration of ∫c |1/(z^2 + 1)| dz, where C is the straight line segment from 2 to 2+i. While Solving, represent the distance from the point i and-i respectively,
+i.e. z+i and z-i on the complex plane C
+---------------------------------------------------
+
+z0=2;
+z1=2+I;
+z[t_]=z0+t*(z1-z0);
+Print["The parametrization equation of the given curve is C : z[t] = ",ComplexExpand[z[t]]," Where 0<t⩽1, which represent straight line joining the points z0 = ",z0," and z1 = ",z1,"."] 
+p1=ParametricPlot[{Re[z[t]],Im[z[t]]},{t,0,1},AxesStyle->Arrowheads[{-0.03,0.03}],AxesLabel->{"x","y"},PlotStyle->{Thick,Green},AxesOrigin->{0,0},Ticks->{Range[-1,3,.5],Range[-2,2.5,0.5]},PlotRange->{{-0.5,3},{-3,3}}];
+Show[p1]
+L= Integrate[Abs[z'[t]],{t,0,1}];
+f[z_]=1/(z^2 + 1);
+r=ComplexExpand[Re[f[z[t]]]];
+i=ComplexExpand[Im[f[z[t]]]];
+M=Maximize[{(r^2 + i^2)^(1/2),0<=t<=1},t];
+ML=M[[1]]*L;
+Print["Length of the Arc is, L = ",1," and the value of M is ",M[[1]],"."]
+Print["Using the ML Inequality, we have an upper bound for the given integral as",ML,"."]
+Manipulate[Show[ParametricPlot[{Re[z[t]],Im[z[t]]},{t,0,1},PlotStyle->{Thick,Red},PlotRange->2],ListLinePlot[{{{0,1},{Re[z[t]],Im[z[t]]}},{{0,-1},{Re[z[t]],Im[z[t]]}}},AxesOrigin->{0,0}]],{t,0,1}]
+
+
+-------------------------------------------------------------------------------------------------------------
+PR13 Find and plot three Laurant Series representation for the function f[z]= 3/(2+z- z^2) involving powers of z.
+-------------------------------------------------------------------------
+
+Grid[
+Table[{n,Normal[Series[3/(2+z - z^2),{z,n,10}]]},{n,{0,2,Infinity}}],Frame->All]
+Plot[Evaluate[Table[{Normal[Series[3/(2+z - z^2),{z,n,10}]]},{n,{0,2,Infinity}}]],{z,-3,3},PlotLegends->"Expressions"]
+
+--------------------------------------------
+PR14 Locate the poles of  f[z] = 1/(5z^4 + 26 z^2 + 5) 
+-----------------------------------------
+
+f[z_] :=1/(5 z^4 + 26 z^2 + 5);
+Print["f[z] = ",f[z]];
+Print[Denominator[f[z]==0]];
+solset=Sort[Solve[Denominator[f[z]]==0,z]]
+Print[solset];
+Print["The singularities are "];
+z1=ReplaceAll[z,solset[[1]]];
+Print["z1 = ",z1];
+z2=ReplaceAll[z,solset[[2]]];
+Print["z2 = ",z2];
+z3=ReplaceAll[z,solset[[3]]];
+Print["z3 = ",z3];
+z4=ReplaceAll[z,solset[[4]]];
+Print["z4 = ",z4];
+
+----------------------------------
+PR15 Locate the poles and zeroes of g[z] = πCot[πz]/z^2, Determine their order, also justify that Res(g,θ)=- -(π^2)/3
+----------------------------------------
+
+
+g[z_] := π*Cot[π*z]/(z^2);
+Reduce[g[z] == 0,z]
+Poles = Solve[Denominator[g[z]]== 0,z]
+residue = Residue[g[z],{z,0}]
+
+
+------------------------------------------------
+PR16 Evaluate ∫c1(θ) e^(2/z) dz , where c1(0)  denotes the circle {z : |z|=1} with positive orientation. Similarly evaluate ∫c1(θ) 1/(z^4 + z^3 - 2 z^2) dz.
+------------------------------------
+
+
+f[z_]:=Exp[2/z];
+residue=SeriesCoefficient[f[z],{z,0,-1}];
+Print["The residue of f[z] at the point z=0 is ",residue," ."]
+integral=2*Pi*I*(residue);
+Print["The Value of ∫c1(θ) e^(2/z) dz, by the cauchy residue theorem is:",integral,"."]
+?SeriesCoefficient
+
+
+g[z_]=1/(z^4 + z^3 - 2 z^2);
+Apart[g[z]]
+?Apart
+residue0=SeriesCoefficient[g[z],{z,0,-1}];
+residue1=SeriesCoefficient[g[z],{z,1,-1}];
+residueminus2=SeriesCoefficient[g[z],{z,-2,-1}];
+Print["Residue of g[z] at z0 = 0 is ",residue0,", at z1=1 is ",residue1," and at z2=-2 is ",residueminus2," ."]
+integral=2*Pi*I*(residue0+residue1+residueminus2);
+Print["The value of ∫c1(θ) 1/(z^4 + z^3 - 2 z^2) dz, by the cauchy residue theorem is:",integral,"."]
