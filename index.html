@@ -1,90 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subject Files</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subject Files</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: white;
+    text-align: center;
+}
 
-        .box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
+.container {
+    margin-top: 70px;
+}
 
-        h1 {
-            margin-bottom: 20px;
-        }
+select, button {
+    padding: 12px;
+    margin: 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+}
 
-        select {
-            padding: 10px;
-            width: 100%;
-            margin-top: 15px;
-            border-radius: 5px;
-            border: none;
-            font-size: 16px;
-        }
+button {
+    background: #00c853;
+    color: white;
+    cursor: pointer;
+}
 
-        button {
-            margin-top: 20px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            background: #00c853;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+button:hover {
+    background: #009624;
+}
 
-        button:hover {
-            background: #009624;
-        }
-    </style>
+.files {
+    display: none;
+    margin-top: 30px;
+}
+
+.file-box {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    margin: 15px auto;
+    width: 320px;
+    border-radius: 10px;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px;
+    background: #ff9800;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background: #e68900;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="box">
-        <h1>📚 Select Your Subject</h1>
+<div class="container">
+    <h1>📚 Select Your Subject</h1>
 
-        <select id="subject">
-            <option value="">-- Choose Subject --</option>
-            <option value="mf">Mathematical Finance</option>
-            <option value="na">Numerical Analysis</option>
-        </select>
+    <select id="subject">
+        <option value="">-- Choose Subject --</option>
+        <option value="mf">Mathematical Finance</option>
+        <option value="na">Numerical Analysis</option>
+    </select>
 
-        <button onclick="goToFile()">Open File</button>
+    <br>
+    <button onclick="showFiles()">Show Files</button>
+
+    <!-- Mathematical Finance -->
+    <div id="mfFiles" class="files">
+        <h2>📂 Mathematical Finance</h2>
+
+        <div class="file-box">
+            <h3>MF Practical</h3>
+            <a href="MF%20PRACTICAL.xlsx" target="_blank">Open File</a>
+        </div>
     </div>
 
-    <script>
-        function goToFile() {
-            const subject = document.getElementById("subject").value;
+    <!-- Numerical Analysis -->
+    <div id="naFiles" class="files">
+        <h2>📂 Numerical Analysis</h2>
 
-            if (subject === "mf") {
-                window.location.href = "MF PRACTICAL.xlsx";
-            } 
-            else if (subject === "na") {
-                window.location.href = "NA PRACTICAL.pdf";
-            } 
-            else {
-                alert("Please select a subject first!");
-            }
-        }
-    </script>
+        <div class="file-box">
+            <h3>NA Practical PDF</h3>
+            <a href="NA%20PRACTICAL.pdf" target="_blank">Open PDF</a>
+        </div>
+
+        <div class="file-box">
+            <h3>NA Practical Codes</h3>
+            <a href="NA%20PRACTICAL%20CODES.nb" target="_blank">Open Codes</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function showFiles() {
+    const subject = document.getElementById("subject").value;
+
+    // Hide both first
+    document.getElementById("mfFiles").style.display = "none";
+    document.getElementById("naFiles").style.display = "none";
+
+    if (subject === "mf") {
+        document.getElementById("mfFiles").style.display = "block";
+    } 
+    else if (subject === "na") {
+        document.getElementById("naFiles").style.display = "block";
+    } 
+    else {
+        alert("Please select a subject!");
+    }
+}
+</script>
 
 </body>
 </html>
