@@ -3,40 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Files</title>
+    <title>Subject Files</title>
 
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background: #222;
-            color: #fff;
-            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.1);
             padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
         }
 
         h1 {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        .file {
-            background: #333;
-            margin: 15px auto;
-            padding: 20px;
-            width: 320px;
-            border-radius: 10px;
+        select {
+            padding: 10px;
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
         }
 
-        a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
             background: #00c853;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-        a:hover {
+        button:hover {
             background: #009624;
         }
     </style>
@@ -44,27 +58,33 @@
 
 <body>
 
-    <h1>📂 Download My Files</h1>
+    <div class="box">
+        <h1>📚 Select Your Subject</h1>
 
-    <div class="file">
-        <h3>1to8.tex</h3>
-        <a href="./1to8.tex" download>Download</a>
+        <select id="subject">
+            <option value="">-- Choose Subject --</option>
+            <option value="mf">Mathematical Finance</option>
+            <option value="na">Numerical Analysis</option>
+        </select>
+
+        <button onclick="goToFile()">Open File</button>
     </div>
 
-    <div class="file">
-        <h3>beamer.tex</h3>
-        <a href="./beamer.tex" download>Download</a>
-    </div>
+    <script>
+        function goToFile() {
+            const subject = document.getElementById("subject").value;
 
-    <div class="file">
-        <h3>pstrick.tex</h3>
-        <a href="./pstrick.tex" download>Download</a>
-    </div>
-
-    <div class="file">
-        <h3>1to8pdf.pdf</h3>
-        <a href="./1to8pdf.pdf" target="_blank">View / Download</a>
-    </div>
+            if (subject === "mf") {
+                window.location.href = "MF PRACTICAL.xlsx";
+            } 
+            else if (subject === "na") {
+                window.location.href = "NA PRACTICAL.pdf";
+            } 
+            else {
+                alert("Please select a subject first!");
+            }
+        }
+    </script>
 
 </body>
 </html>
